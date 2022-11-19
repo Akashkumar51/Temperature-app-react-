@@ -1,23 +1,31 @@
-import logo from './logo.svg';
 import './App.css';
+import React,{useState,useEffect} from 'react';
+
 
 function App() {
+  const [data, setData] = useState(10)
+  const [color, setColor] = useState("cold")
+  
+  useEffect(() => {
+    if (data >= 15) {
+      setColor("hot")
+    }else{
+      setColor("cold")
+    }
+  
+  }, [data])
+  
+  
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app-container">
+      <div className='temperature-display-container'>
+        <div className={`temperature-display ${color}`}>{data}°C</div>
+      </div>
+        <div className='button-container'>
+          <button onClick={() => setData( data +1)}>+</button>
+          <button onClick={() => setData(data -1)}>-</button>
+        </div>
     </div>
   );
 }
